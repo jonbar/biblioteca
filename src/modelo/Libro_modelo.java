@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Libro_modelo extends Conector{
 
-	Libro_modelo(String dbIzena) {
+	public Libro_modelo(String dbIzena) {
 		super(dbIzena);
 	}
 	
