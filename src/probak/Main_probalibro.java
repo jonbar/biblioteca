@@ -1,7 +1,10 @@
-package modelo;
+package probak;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import modelo.Libro;
+import modelo.Libro_modelo;
 
 public class Main_probalibro {
 

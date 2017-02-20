@@ -1,7 +1,10 @@
-package modelo;
+package probak;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import modelo.Socio;
+import modelo.Socio_modelo;
 
 public class Main_probasocio {
 
