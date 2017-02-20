@@ -28,7 +28,7 @@ public class Libro_modelo extends Conector{
 		return libros;
 	}
 	
-	void insert(Libro libro){
+	public void insert(Libro libro){
 		try {
 			PreparedStatement ps = this.conexion.prepareStatement("insert into libros (titulo, autor, num_pag) values(?,?,?)");
 			
@@ -47,7 +47,7 @@ public class Libro_modelo extends Conector{
 		}
 	}
 	
-	int update(Libro libro){
+	public int update(Libro libro){
 		PreparedStatement ps;
 		try {
 			ps = this.conexion.prepareStatement("update libros set titulo=?, autor=?, num_pag=? where id=?");
@@ -66,7 +66,7 @@ public class Libro_modelo extends Conector{
 		return 0;
 	}
 	
-	void delete(int id_libro){
+	public void delete(int id_libro){
 		try {
 			Statement st = this.conexion.createStatement();
 			st.execute("delete from libros where id=" + id_libro);
