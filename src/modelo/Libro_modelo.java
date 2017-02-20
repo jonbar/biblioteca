@@ -12,7 +12,7 @@ public class Libro_modelo extends Conector{
 		super(dbIzena);
 	}
 	
-	ArrayList <Libro> select(){
+	public ArrayList <Libro> select(){
 		ArrayList<Libro> libros = new ArrayList<Libro>(); 
 		try {
 			Statement st = this.conexion.createStatement();
