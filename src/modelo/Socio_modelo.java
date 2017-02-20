@@ -51,12 +51,12 @@ public class Socio_modelo extends Conector{
 			Statement st = super.getConexion().createStatement();
 			lineascambiadas = st.executeUpdate("UPDATE socios "
 											 + "SET nombre='"  	 + socio.getNombre()  	+ "'"
-											 + "SET apellido='"  + socio.getApellido() 	+ "'"
-											 + "SET direccion='" + socio.getDireccion() + "'"
-											 + "SET poblacion='" + socio.getPoblacion() + "'"
-											 + "SET provincia='" + socio.getProvincia() + "'"
-											 + "SET dni='"		 + socio.getDni() 		+ "'"
-											 + "WHERE id=" + socio.getId());
+											 + ",apellido='"  + socio.getApellido() 	+ "'"
+											 + ",direccion='" + socio.getDireccion() + "'"
+											 + ",poblacion='" + socio.getPoblacion() + "'"
+											 + ",provincia='" + socio.getProvincia() + "'"
+											 + ",dni='"		 + socio.getDni() 		+ "'"
+											 + " WHERE id=" + socio.getId());
 			return lineascambiadas;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
