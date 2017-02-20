@@ -1,5 +1,6 @@
 package modelo;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -7,11 +8,11 @@ import java.util.ArrayList;
 
 public class Socio_modelo extends Conector{
 
-	Socio_modelo(String dbIzena) {
+	public Socio_modelo(String dbIzena) {
 		super(dbIzena);
 	}
 	
-	ArrayList <Socio> select(){
+	public ArrayList <Socio> select(){
 		ArrayList<Socio> socios = new ArrayList<Socio>(); 
 		try {
 			Statement st = this.conexion.createStatement();
@@ -25,6 +26,55 @@ public class Socio_modelo extends Conector{
 			e.printStackTrace();
 		}
 		return socios;
+	}
+	public void insert(Socio socio) {
+		Statement st;
+		try {
+			st = super.getConexion().createStatement();
+			st.execute("INSERT INTO socios (id,nombre,apellido,direccion,poblacion,provincia,dni) " 
+					 + "VALUES ('" + socio.getNombre() + "','"
+					 			   + socio.getApellido() + "','" 
+					 			   + socio.getDireccion() + "','" 
+					 			   + socio.getPoblacion() + "','" 
+					 			   + socio.getProvincia() + "','" 
+					 			   + socio.getDni() + "'");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	public int update(Socio socio) {
+		int lineascambiadas;
+		try {
+			Statement st = super.getConexion().createStatement();
+			lineascambiadas = st.executeUpdate("UPDATE socios "
+											 + "SET nombre='"  	 + socio.getNombre()  	+ "'"
+											 + "SET apellido='"  + socio.getApellido() 	+ "'"
+											 + "SET direccion='" + socio.getDireccion() + "'"
+											 + "SET poblacion='" + socio.getPoblacion() + "'"
+											 + "SET provincia='" + socio.getProvincia() + "'"
+											 + "SET dni='"		 + socio.getDni() 		+ "'"
+											 + "WHERE id=" + socio.getId());
+			return lineascambiadas;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+
+	}
+
+	public void delete(int id) {
+		try {
+			Statement st = super.getConexion().createStatement();
+			st.execute("DELETE FROM socios " + "WHERE id= ('" + id + "')");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 }
