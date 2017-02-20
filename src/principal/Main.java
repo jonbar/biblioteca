@@ -52,6 +52,12 @@ public class Main {
 				break;
 
 			case 3: // VER LIBROS
+				ArrayList<Libro> libros = lm.select();
+				Iterator<Libro> i = libros.iterator();
+				
+				while(i.hasNext()){
+					i.next().mostrarInfo();
+				}
 				break;
 				
 			case 4: // VER SOCIOS
