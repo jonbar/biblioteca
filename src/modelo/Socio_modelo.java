@@ -28,6 +28,30 @@ public class Socio_modelo extends Conector {
 		}
 		return socios;
 	}
+	
+	public void select(int id){
+		try {
+			Statement st = this.conexion.createStatement();
+			ResultSet rs = st.executeQuery("select * from socios");
+			while(rs.next()){
+				if (id == rs.getInt("id")){
+				Socio socio = new Socio(
+						rs.getInt("id"), 
+						rs.getString("nombre"), 
+						rs.getString("apellido"), 
+						rs.getString("direccion"), 
+						rs.getString("poblacion"), 
+						rs.getString("provincia"), 
+						rs.getString("dni"));
+				socio.mostrarInfo();
+				}
+				}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public void insert(Socio socio) {
 		Statement st;
