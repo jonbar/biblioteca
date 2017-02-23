@@ -28,26 +28,36 @@ public class Libro_modelo extends Conector{
 		return libros;
 	}
 	
-	public void select(int id){
+	public Libro select(int id){
 		try {
 			Statement st = this.conexion.createStatement();
-			ResultSet rs = st.executeQuery("select * from libros");
-			while(rs.next()){
-				if (id == rs.getInt("id")){
-				Libro libro = new Libro(
-						rs.getInt("id"), 
-						rs.getString("titulo"), 
-						rs.getString("autor"), 
-						rs.getInt("num_pag"));
-				libro.mostrarInfo();
-				}
-				}
-			
+			ResultSet rs = st.executeQuery("select * from libros WHERE id ='" + id + "';");
+			rs.next();
+			Libro libro = new Libro(rs.getInt("id"),rs.getString("titulo"),rs.getString("autor"),rs.getInt("num_pag"));
+			return libro;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return null;
 	}
+	
+	public ArrayList<Libro> select(String autor){
+		ArrayList<Libro> libros = new ArrayList<Libro>();
+		try {
+			Statement st = this.conexion.createStatement();
+			ResultSet rs = st.executeQuery("select * from libros WHERE autor ='" + autor + "'");
+			while(rs.next()){
+				Libro libro = new Libro(rs.getInt("id"),rs.getString("titulo"),rs.getString("autor"),rs.getInt("num_pag"));
+				libros.add(libro);
+				}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return libros;
+	}
+
 	
 	public void insert(Libro libro){
 		try {

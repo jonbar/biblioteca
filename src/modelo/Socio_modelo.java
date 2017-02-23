@@ -1,5 +1,6 @@
 package modelo;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -28,29 +29,23 @@ public class Socio_modelo extends Conector {
 		}
 		return socios;
 	}
-	
-	public void select(int id){
+
+	public Socio select(int id) {
+		PreparedStatement pst;
 		try {
-			Statement st = this.conexion.createStatement();
-			ResultSet rs = st.executeQuery("select * from socios");
-			while(rs.next()){
-				if (id == rs.getInt("id")){
-				Socio socio = new Socio(
-						rs.getInt("id"), 
-						rs.getString("nombre"), 
-						rs.getString("apellido"), 
-						rs.getString("direccion"), 
-						rs.getString("poblacion"), 
-						rs.getString("provincia"), 
-						rs.getString("dni"));
-				socio.mostrarInfo();
-				}
-				}
-			
+			pst = this.conexion.prepareStatement("select * from socios where id =?");
+			pst.setInt(1, id);
+			ResultSet rs = pst.executeQuery();
+			rs.next();
+			return new Socio(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido"),
+					rs.getString("direccion"), rs.getString("poblacion"), rs.getString("provincia"),
+					rs.getString("dni"));
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return null;
 	}
 
 	public void insert(Socio socio) {

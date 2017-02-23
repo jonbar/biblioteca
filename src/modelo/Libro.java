@@ -5,7 +5,12 @@ public class Libro {
 	private String titulo;
 	private String autor;
 	private int num_pag;
-	
+
+	public Libro() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public Libro(int id, String titulo, String autor, int num_pag) {
 		super();
 		this.id = id;
@@ -13,12 +18,10 @@ public class Libro {
 		this.autor = autor;
 		this.num_pag = num_pag;
 	}
-	
-	public void mostrarInfo(){
-		System.out.println("id: "+ this.id
-				+ " titulo: " + this.titulo
-				+ " autor: " + this.autor 
-				+ " paginas: " + this.num_pag);
+
+	public void mostrarInfo() {
+		System.out.println(
+				"id: " + this.id + " titulo: " + this.titulo + " autor: " + this.autor + " paginas: " + this.num_pag);
 	}
 
 	public int getId() {
@@ -52,6 +55,5 @@ public class Libro {
 	public void setNum_pag(int num_pag) {
 		this.num_pag = num_pag;
 	}
-	
-	
+
 }
