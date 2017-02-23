@@ -9,7 +9,7 @@ import java.util.Date;
 
 public class Prestamo_modelo extends Conector {
 
-	Prestamo_modelo(String dbIzena) {
+	public Prestamo_modelo(String dbIzena) {
 		super(dbIzena);
 		// TODO Auto-generated constructor stub
 	}
@@ -31,8 +31,17 @@ public class Prestamo_modelo extends Conector {
 	}
 	
 	public Prestamo select(int id_libro, int id_socio, Date fecha){
-		
-		return null;
+			try {
+				Statement st = this.conexion.createStatement();
+				ResultSet rs = st.executeQuery("SELECT * FROM `prestamos` WHERE `id_libro`=" + id_libro + " AND id_socio = " + id_socio + " AND fecha = " + fecha + ";");
+				rs.next();
+				Prestamo prestamo = new Prestamo(rs.getInt("id_libro"), rs.getInt("id_socio"), rs.getDate("fecha"), rs.getBoolean("devuelto"));
+				return prestamo;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
 	}
 	
 	public void insert(Prestamo prestamo){
