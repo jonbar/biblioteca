@@ -1,6 +1,9 @@
 package principal;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Scanner;
 
@@ -17,16 +20,18 @@ public class Main {
 	public final static int ELIMINAR_LIBRO = 7;
 	public final static int ELIMINAR_SOCIO = 8;
 	public final static int VER_LIBROS_POR_AUTOR = 9;
+	public final static int VER_PRESTAMO = 10;
 	public final static int SALIR = 0;
 	
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException {
 		// MAIN DE PRUEBA PARA LIBRO
 
 		// Instanciar
 
 		Libro_modelo lm = new Libro_modelo("biblioteka");
 		Socio_modelo sm = new Socio_modelo("biblioteka");
+		Prestamo_modelo pm = new Prestamo_modelo("biblioteka");
 		
 		Scanner scan = new Scanner(System.in);
 		Scanner autorMetido = new Scanner(System.in);
@@ -43,6 +48,7 @@ public class Main {
 			System.out.println("7. Eliminar libro");
 			System.out.println("8. Eliminar socio");
 			System.out.println("9. Ver libros por autor");
+			System.out.println("10. Ver prestamo");
 			System.out.println("0. Salir del menú\n");
 			
 			opcion = scan.nextInt();
@@ -133,7 +139,15 @@ public class Main {
 				while (i.hasNext()){
 					i.next().mostrarInfo();
 				}
-				break;			
+				break;		
+				
+			case VER_PRESTAMO:
+				SimpleDateFormat eus_format = new SimpleDateFormat("yyyy/MM/dd");
+
+				Date fecha = eus_format.parse("2017/02/08");
+				pm.select(1,3,fecha).mostrarInfo();
+
+				break;
 			
 			case SALIR:
 				System.out.println("Saliendo....");

@@ -21,6 +21,14 @@ public class Prestamo {
 		this.fecha = fecha;
 		this.devuelto = devuelto;
 	}
+	
+	public void mostrarInfo(){
+		System.out.println("\t-Prestamo-");
+		System.out.println("ID Libro: " + this.getId_libro());
+		System.out.println("ID Socio: " + this.getId_socio());
+		System.out.println("Fecha: " + this.getFecha());
+		System.out.println("Devuelto: " + this.isDevuelto());
+	}
 
 	public int getId_libro() {
 		return id_libro;
