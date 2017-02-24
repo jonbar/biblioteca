@@ -143,7 +143,6 @@ public class Main {
 				
 			case VER_PRESTAMO:
 				SimpleDateFormat eus_format = new SimpleDateFormat("yyyy/MM/dd");
-
 				Date fecha = eus_format.parse("2017/02/08");
 				pm.select(1,3,fecha).mostrarInfo();
 
