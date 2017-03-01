@@ -19,7 +19,7 @@ public class Prestamo_modelo extends Conector {
 		ArrayList<Prestamo> prestamos = new ArrayList<Prestamo>();
 		try {
 			Statement st = this.conexion.createStatement();
-			ResultSet rs = st.executeQuery("select * from prestamo");
+			ResultSet rs = st.executeQuery("SELECT * FROM prestamo");
 			while (rs.next()) {
 				prestamos.add(new Prestamo(rs.getInt("id_libro"), rs.getInt("id_socio"), rs.getDate("fecha"),
 						rs.getBoolean("devuelto")));
@@ -67,5 +67,23 @@ public class Prestamo_modelo extends Conector {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public ArrayList<Prestamo> prestamosDeSocio(int id_socio){
+		ArrayList<Prestamo> prestamosDeSocio = new ArrayList<Prestamo>();
+		try {
+			Statement st = this.conexion.createStatement();
+			ResultSet rs = st.executeQuery("select * from prestamos WHERE id_socio = '" + id_socio + "'");
+			while (rs.next()) {
+				prestamosDeSocio.add(new Prestamo(rs.getInt("id_libro"), rs.getInt("id_socio"), rs.getDate("fecha"),
+						rs.getBoolean("devuelto")));
+			}
+			return prestamosDeSocio;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 }

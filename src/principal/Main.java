@@ -20,7 +20,8 @@ public class Main {
 	public final static int ELIMINAR_LIBRO = 7;
 	public final static int ELIMINAR_SOCIO = 8;
 	public final static int VER_LIBROS_POR_AUTOR = 9;
-	public final static int VER_PRESTAMO = 10;
+	public final static int REALIZAR_PRESTAMO = 10;
+	public final static int VER_PRESTAMOS_SOCIO = 11;
 	public final static int SALIR = 0;
 	
 
@@ -48,8 +49,9 @@ public class Main {
 			System.out.println("7. Eliminar libro");
 			System.out.println("8. Eliminar socio");
 			System.out.println("9. Ver libros por autor");
-			System.out.println("10. Ver prestamo");
-			System.out.println("0. Salir del menú\n");
+			System.out.println("10. Realizar prestamo");
+			System.out.println("11. Ver prestamos socio");
+			System.out.println("0. Salir del menú");
 			
 			opcion = scan.nextInt();
 			switch (opcion) {
@@ -141,10 +143,22 @@ public class Main {
 				}
 				break;		
 				
-			case VER_PRESTAMO:
-				SimpleDateFormat eus_format = new SimpleDateFormat("yyyy/MM/dd");
-				Date fecha = eus_format.parse("2017/02/08");
-				pm.select(1,3,fecha).mostrarInfo();
+			case REALIZAR_PRESTAMO:
+				System.out.println("Introduce un id de socio:");
+				int id_socio = Integer.parseInt(scan.nextLine());
+				System.out.println("Introduce un id de libro:");
+				int id_libro = Integer.parseInt(scan.nextLine());
+				
+				pm.insert(new Prestamo(id_socio, id_libro, new Date(), false));
+				System.out.println("Prestamo realizado! socio: " + sm.select(id_socio).getNombre()+ ", libro: " + lm.select(id_libro).getTitulo());
+				break;
+				
+			case VER_PRESTAMOS_SOCIO:
+				System.out.print("Mete un nombre de socio: ");
+				String nombreSocioPrestamo = scan.nextLine();
+				
+				id_socio = sm.selectSocioPorNombre(nombreSocioPrestamo).getId();
+				pm.prestamosDeSocio(id_socio);
 
 				break;
 			

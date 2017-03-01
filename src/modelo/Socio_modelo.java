@@ -90,4 +90,20 @@ public class Socio_modelo extends Conector {
 
 	}
 
+	public Socio selectSocioPorNombre(String nombre) {
+		try {
+			Statement st = this.conexion.createStatement();
+			ResultSet rs = st.executeQuery("select * from socios WHERE nombre = '" + nombre + "'");
+			rs.next();
+				Socio socio = new Socio(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido"),
+						rs.getString("direccion"), rs.getString("poblacion"), rs.getString("provincia"),
+						rs.getString("dni"));
+				return socio;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }
